@@ -3,10 +3,10 @@ class CreateIdeas < ActiveRecord::Migration
     create_table :ideas do |t|
       t.string :title
       t.text   :description
-      t.string :_ip, :limit => 15
-      t.string :_client
-      t.string :_lang, :limit => 5
-      t.string :_geo
+      t.string :ip, :limit => 15
+      t.string :client
+      t.string :lang, :limit => 5
+      t.string :geo
       t.timestamps
     end
   end

@@ -9,18 +9,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090609023456) do
+ActiveRecord::Schema.define(:version => 20090609223757) do
 
   create_table "ideas", :force => true do |t|
     t.string   "title"
     t.text     "description"
-    t.string   "_ip",         :limit => 15
-    t.string   "_client"
-    t.string   "_lang",       :limit => 5
-    t.string   "_geo"
+    t.string   "ip",          :limit => 15
+    t.string   "client"
+    t.string   "lang",        :limit => 5
+    t.string   "geo"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
+
+  add_index "ideas", ["user_id"], :name => "index_ideas_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "username"
