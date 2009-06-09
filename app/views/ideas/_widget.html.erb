@@ -1,0 +1,6 @@
+<h3>Idea Widget</h3>
+<div id="idea_widget" class="widget">
+<% for idea in @ideas %>
+  <li><%= link_to h(idea.title), idea %></li>
+<% end %>
+</div>

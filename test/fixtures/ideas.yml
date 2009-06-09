@@ -1,0 +1,15 @@
+one:
+  title: MyString
+  description: MyText
+  _ip: MyString
+  _client: MyString
+  _lang: MyString
+  _geo: MyString
+
+two:
+  title: MyString
+  description: MyText
+  _ip: MyString
+  _client: MyString
+  _lang: MyString
+  _geo: MyString

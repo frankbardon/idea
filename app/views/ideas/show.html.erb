@@ -1,0 +1,32 @@
+<% title "Idea" %>
+
+<p>
+  <strong>Title:</strong>
+  <%=h @idea.title %>
+</p>
+<p>
+  <strong>Description:</strong>
+  <%=h @idea.description %>
+</p>
+<p>
+  <strong> Ip:</strong>
+  <%=h @idea._ip %>
+</p>
+<p>
+  <strong> Client:</strong>
+  <%=h @idea._client %>
+</p>
+<p>
+  <strong> Lang:</strong>
+  <%=h @idea._lang %>
+</p>
+<p>
+  <strong> Geo:</strong>
+  <%=h @idea._geo %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_idea_path(@idea) %> |
+  <%= link_to "Destroy", @idea, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", ideas_path %>
+</p>

@@ -84,3 +84,15 @@ a {
   float: right;
   font-size: 12px;
 }
+
+#navigation {
+  padding: 6px 12px;
+  border: 1px dotted #000;
+  color: #fff;
+}
+
+.widget {
+  padding: 6px;
+  border: 1px dotted #000;
+  width: 400px;
+}
