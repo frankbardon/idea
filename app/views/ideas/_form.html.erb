@@ -1,9 +1,9 @@
 <% form_for @idea do |f| %>
   <%= f.error_messages %>
-  <%= f.hidden_field :_ip, :value => request.remote_ip %>
-  <%= f.hidden_field :_lang, :value => "en-us" %>
-  <%= f.hidden_field :_geo, :value => "39.820521,-75.184901" %>
-  <%= f.hidden_field :_client, :value => "web" %>
+  <%= f.hidden_field :ip, :value => request.remote_ip %>
+  <%= f.hidden_field :lang, :value => "en-us" %>
+  <%= f.hidden_field :geo, :value => "39.820521,-75.184901" %>
+  <%= f.hidden_field :client, :value => "web" %>
   <p>
     <%= f.label :title %><br />
     <%= f.text_field :title %>

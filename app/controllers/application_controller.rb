@@ -47,4 +47,8 @@ class ApplicationController < ActionController::Base
       redirect_to(session[:return_to] || default)
       session[:return_to] = nil
     end
+    
+    def convert_invalid_xml_field_names(record)
+      #record..gsub!(/_/, '')
+    end
 end
