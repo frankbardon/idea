@@ -1,43 +1,8 @@
-<p>
-  <b>Title:</b>
-  <%=h @piece.title %>
-</p>
+<h1><%=h @piece.title %></h1>
 
 <p>
-  <b>Description:</b>
   <%=h @piece.description %>
 </p>
 
-<p>
-  <b>Ip:</b>
-  <%=h @piece.ip %>
-</p>
-
-<p>
-  <b>Client:</b>
-  <%=h @piece.client %>
-</p>
-
-<p>
-  <b>Lang:</b>
-  <%=h @piece.lang %>
-</p>
-
-<p>
-  <b>Geo:</b>
-  <%=h @piece.geo %>
-</p>
-
-<p>
-  <b>User:</b>
-  <%=h @piece.user_id %>
-</p>
-
-<p>
-  <b>Idea:</b>
-  <%=h @piece.idea_id %>
-</p>
-
-
-<%= link_to 'Edit', edit_piece_path(@piece) %> |
-<%= link_to 'Back', pieces_path %>
+<%= link_to 'Edit', edit_idea_piece_path(@idea, @piece) %> |
+<%= link_to 'Back', idea_pieces_path %>

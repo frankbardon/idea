@@ -1,11 +1,9 @@
 class IdeasController < ApplicationController
 
-  include ApplicationHelper
-
   before_filter :require_user, :except => [:show]
 
   def index
-    @ideas = current_user.ideas.all
+    @ideas = Idea.all(:conditions => ["user_id = ?", current_user.id])
     respond_to do |wants|
       wants.html
       wants.xml  { render :xml => @ideas }
@@ -37,7 +35,8 @@ class IdeasController < ApplicationController
   end
   
   def create
-    @idea = current_user.ideas.new(params[:idea])
+    @idea = Idea.new(params[:idea])
+    @idea.set_user_id(current_user.id)
     respond_to do |wants|
       if @idea.save
         flash[:notice] = "Successfully created idea."
@@ -51,7 +50,7 @@ class IdeasController < ApplicationController
   end
   
   def update
-    @idea = current_user.ideas.find(params[:id])
+    @idea = Idea.find(params[:id])
     respond_to do |wants|
       if @idea.update_attributes(params[:idea])
         flash[:notice] = "Successfully updated idea."
@@ -72,6 +71,7 @@ class IdeasController < ApplicationController
       respond_to do |wants|
         wants.html { redirect_to(ideas_url) }
         wants.xml  { head :ok }
+        wants.js   { head :ok }
       end
     else
       flash_and_redirect("You do not have rights to delete this idea", @idea)

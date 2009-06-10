@@ -14,10 +14,10 @@
     Idea.NET
   </div>
   <div class="navigation">
-    <%= link_to "Main Page", :controller => "pages" %> |
-    <%= link_to "My Ideas", :controller => "ideas" %> |
+    <%= link_to "Home", :controller => "pages" %> |
+    <%= link_to "Ideas", :controller => "ideas" %> |
     <% if current_user %>
-      <%= link_to "Edit Profile", edit_user_path(:current) %> |
+      <%= link_to "Settings", edit_user_path(:current) %> |
       <%= link_to "Logout", logout_path %>
     <% else %>
       <%= link_to "Register", new_user_path %> |

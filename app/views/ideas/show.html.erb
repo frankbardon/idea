@@ -1,34 +1,31 @@
-<% title h(@idea.title) %>
+<h2>
+  <%= h(@idea.title) %>
+  <small>by: <%= link_to @idea.user.username, @idea.user %></small>
+</h2>
 
-<p>
-  <strong>Author:</strong>
-  <%= link_to @idea.user.username, @idea.user %>
-</p>
-<p>
-  <strong>Description:</strong>
-  <%=h @idea.description %>
-</p>
-<p>
-  <strong> Ip:</strong>
-  <%=h @idea.ip %>
-</p>
-<p>
-  <strong> Client:</strong>
-  <%=h @idea.client %>
-</p>
-<p>
-  <strong> Lang:</strong>
-  <%=h @idea.lang %>
-</p>
-<p>
-  <strong> Geo:</strong>
-  <%=h @idea.geo %>
-</p>
+<p><%=h @idea.description %></p>
 
 <% if is_current_user? @idea.user -%>
 <p>
+  <small>
   <%= link_to "Edit", edit_idea_path(@idea) %> |
   <%= link_to "Destroy", @idea, :confirm => 'Are you sure?', :method => :delete %> |
   <%= link_to "View All", ideas_path %>
+  </small>
 </p>
 <% end -%>
+
+<h2>Pieces</h2>
+<ul>
+<% if @idea.pieces.empty? -%>
+  <li>There are no pieces to display.</li>
+<% else -%>
+<% @idea.pieces.each do |piece| -%>
+  <li><%= link_to piece.title, idea_piece_path(@idea,piece) %> <small>by <%= link_to piece.user.username, piece.user %></small></li>
+<% end -%>
+<% end -%>
+</ul>
+
+<p>
+  <%= link_to "New Piece", new_idea_piece_path(@idea) %>
+</p>

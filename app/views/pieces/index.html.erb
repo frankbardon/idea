@@ -4,31 +4,19 @@
   <tr>
     <th>Title</th>
     <th>Description</th>
-    <th>Ip</th>
-    <th>Client</th>
-    <th>Lang</th>
-    <th>Geo</th>
-    <th>User</th>
-    <th>Idea</th>
   </tr>
 
 <% @pieces.each do |piece| %>
   <tr>
     <td><%=h piece.title %></td>
     <td><%=h piece.description %></td>
-    <td><%=h piece.ip %></td>
-    <td><%=h piece.client %></td>
-    <td><%=h piece.lang %></td>
-    <td><%=h piece.geo %></td>
-    <td><%=h piece.user_id %></td>
-    <td><%=h piece.idea_id %></td>
     <td><%= link_to 'Show', piece %></td>
-    <td><%= link_to 'Edit', edit_piece_path(piece) %></td>
-    <td><%= link_to 'Destroy', piece, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Edit', edit_idea_piece_path(piece) %></td>
+    <td><%= link_to 'Destroy', [@idea, piece], :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New piece', new_piece_path %>
+<%= link_to 'New piece', new_idea_piece_path %>

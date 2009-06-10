@@ -1,0 +1,16 @@
+<% form_for [@idea, @piece] do |f| %>
+<%= f.error_messages %>
+<%= f.hidden_field :ip, :value => request.remote_ip %>
+<%= f.hidden_field :lang, :value => "en-us" %>
+<%= f.hidden_field :geo, :value => "39.820521,-75.184901" %>
+<%= f.hidden_field :client, :value => "web" %>
+<p>
+  <%= f.label :title %><br />
+  <%= f.text_field :title %>
+</p>
+<p>
+  <%= f.label :description %><br />
+  <%= f.text_area :description %>
+</p>
+<p><%= f.submit "Submit" %></p>
+<% end %>

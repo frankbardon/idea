@@ -1,85 +1,87 @@
 class PiecesController < ApplicationController
-  # GET /pieces
-  # GET /pieces.xml
+
+  layout "application"
+  before_filter :require_user, :except => [:show]
+
   def index
-    @pieces = Piece.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @pieces }
+    @idea   = Idea.find(params[:idea_id])
+    @pieces = @idea.pieces.all
+    respond_to do |wants|
+      wants.html
+      wants.xml  { render :xml => @pieces }
+      wants.js   { render :json => @pieces }
     end
   end
 
-  # GET /pieces/1
-  # GET /pieces/1.xml
   def show
-    @piece = Piece.find(params[:id])
+    @idea  = Idea.find(params[:idea_id])
+    @piece = @idea.pieces.find(params[:id])
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @piece }
+    respond_to do |wants|
+      wants.html
+      wants.xml  { render :xml => @piece }
+      wants.js   { render :json => @piece }
     end
   end
 
-  # GET /pieces/new
-  # GET /pieces/new.xml
   def new
-    @piece = Piece.new
+    @idea  = Idea.find(params[:idea_id])
+    @piece = @idea.pieces.new
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @piece }
+    respond_to do |wants|
+      wants.html
+      wants.xml  { render :xml => @piece }
+      wants.js   { render :json => @piece }
     end
   end
 
-  # GET /pieces/1/edit
   def edit
-    @piece = Piece.find(params[:id])
+    @idea  = Idea.find(params[:idea_id])
+    @piece = @idea.pieces.find(params[:id])
   end
 
-  # POST /pieces
-  # POST /pieces.xml
   def create
-    @piece = Piece.new(params[:piece])
+    @idea  = Idea.find(params[:idea_id])
+    @piece = @idea.pieces.new(params[:piece])
+    @piece.set_user_id(current_user.id)
 
-    respond_to do |format|
+    respond_to do |wants|
       if @piece.save
         flash[:notice] = 'Piece was successfully created.'
-        format.html { redirect_to(@piece) }
-        format.xml  { render :xml => @piece, :status => :created, :location => @piece }
+        wants.html { redirect_to(@idea) }
+        wants.xml  { render :xml => @piece, :status => :created, :location => @piece }
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @piece.errors, :status => :unprocessable_entity }
+        wants.html { render :action => "new" }
+        wants.xml  { render :xml => @piece.errors, :status => :unprocessable_entity }
       end
     end
   end
 
-  # PUT /pieces/1
-  # PUT /pieces/1.xml
   def update
-    @piece = Piece.find(params[:id])
+    @idea  = Idea.find(params[:idea_id])
+    @piece = @idea.pieces.find(params[:id])
 
-    respond_to do |format|
+    respond_to do |wants|
       if @piece.update_attributes(params[:piece])
         flash[:notice] = 'Piece was successfully updated.'
-        format.html { redirect_to(@piece) }
-        format.xml  { head :ok }
+        wants.html { redirect_to(idea_piece_path(@idea, @piece)) }
+        wants.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @piece.errors, :status => :unprocessable_entity }
+        wants.html { render :action => "edit" }
+        wants.xml  { render :xml => @piece.errors, :status => :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /pieces/1
-  # DELETE /pieces/1.xml
   def destroy
-    @piece = Piece.find(params[:id])
+    @idea  = Idea.find(params[:idea_id])
+    @piece = @idea.pieces.find(params[:id])
     @piece.destroy
 
-    respond_to do |format|
-      format.html { redirect_to(pieces_url) }
-      format.xml  { head :ok }
+    respond_to do |wants|
+      wants.html { redirect_to(pieces_url) }
+      wants.xml  { head :ok }
+      wants.js    { head :ok }
     end
   end
 end
