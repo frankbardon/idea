@@ -1,10 +1,11 @@
 class IdeasController < ApplicationController
 
-  before_filter :require_user, :except => [:index, :show]
-  before_filter :find_idea, :only => [:show, :edit, :update, :destroy]
+  include ApplicationHelper
+
+  before_filter :require_user, :except => [:show]
 
   def index
-    @ideas = Idea.all
+    @ideas = current_user.ideas.all
     respond_to do |wants|
       wants.html
       wants.xml  { render :xml => @ideas }
@@ -32,10 +33,11 @@ class IdeasController < ApplicationController
   
   def edit
     @idea = Idea.find(params[:id])
+    flash_and_redirect_if_forbidden_access("Forbidden action, redirected.", @idea)
   end
   
   def create
-    @idea = Idea.new(params[:idea])
+    @idea = current_user.ideas.new(params[:idea])
     respond_to do |wants|
       if @idea.save
         flash[:notice] = "Successfully created idea."
@@ -49,7 +51,7 @@ class IdeasController < ApplicationController
   end
   
   def update
-    @idea = Idea.find(params[:id])
+    @idea = current_user.ideas.find(params[:id])
     respond_to do |wants|
       if @idea.update_attributes(params[:idea])
         flash[:notice] = "Successfully updated idea."
@@ -64,17 +66,16 @@ class IdeasController < ApplicationController
   
   def destroy
     @idea = Idea.find(params[:id])
-    @idea.destroy
-    flash[:notice] = "Successfully destroyed idea."
-    respond_to do |wants|
-      wants.html { redirect_to(ideas_url) }
-      wants.xml  { head :ok }
+    if current_user_allowed_to_access?(@idea)
+      @idea.destroy
+      flash[:notice] = "Successfully destroyed idea."
+      respond_to do |wants|
+        wants.html { redirect_to(ideas_url) }
+        wants.xml  { head :ok }
+      end
+    else
+      flash_and_redirect("You do not have rights to delete this idea", @idea)
     end
   end
-
-  private
-    def find_idea
-      @idea = Idea.find(params[:id])
-    end
 
 end

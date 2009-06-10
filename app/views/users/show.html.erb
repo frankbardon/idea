@@ -1,0 +1,20 @@
+<% title @user.username %>
+
+<p>
+  <strong>Email:</strong>
+  <%=h @user.email %>
+</p>
+
+<h2>Recent Ideas</h2>
+<ul>
+<%= "<li>There are no recent ideas to display.</li>" if @user.ideas.empty? %>
+<% @user.ideas.each do |idea| -%>
+  <li><%= link_to idea.title, idea %></li>
+<% end -%>
+</ul>
+
+<% if is_current_user? @user -%>
+<p>
+  <%= link_to "Edit Profile", edit_user_path(@user) %>
+</p>
+<% end -%>

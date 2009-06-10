@@ -3,7 +3,7 @@
 
 class ApplicationController < ActionController::Base
 
-  helper :layout
+  helper :all
 
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
@@ -48,7 +48,18 @@ class ApplicationController < ActionController::Base
       session[:return_to] = nil
     end
     
-    def convert_invalid_xml_field_names(record)
-      #record..gsub!(/_/, '')
+    def flash_and_redirect(message, location)
+      flash[:error] = message
+      redirect_to location
+    end
+    
+    def flash_and_redirect_if_forbidden_access(message, resource)
+      unless current_user_allowed_to_access?(resource)
+        flash_and_redirect(message, resource)
+      end
+    end
+    
+    def current_user_allowed_to_access?(resource)
+      current_user && (current_user.id == resource.user.id)
     end
 end

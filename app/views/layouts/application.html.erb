@@ -10,7 +10,7 @@
     <div id="container">
       <div id="navigation">
         <%= link_to "Main Page", :controller => "pages" %> |
-        <%= link_to "Ideas", :controller => "ideas" %>
+        <%= link_to "My Ideas", :controller => "ideas" %>
         <div id="user_nav">
           <% if current_user %>
             <%= link_to "Edit Profile", edit_user_path(:current) %> |
