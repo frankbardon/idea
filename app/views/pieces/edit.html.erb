@@ -1,0 +1,44 @@
+<h1>Editing piece</h1>
+
+<% form_for(@piece) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </p>
+  <p>
+    <%= f.label :ip %><br />
+    <%= f.text_field :ip %>
+  </p>
+  <p>
+    <%= f.label :client %><br />
+    <%= f.text_field :client %>
+  </p>
+  <p>
+    <%= f.label :lang %><br />
+    <%= f.text_field :lang %>
+  </p>
+  <p>
+    <%= f.label :geo %><br />
+    <%= f.text_field :geo %>
+  </p>
+  <p>
+    <%= f.label :user_id %><br />
+    <%= f.text_field :user_id %>
+  </p>
+  <p>
+    <%= f.label :idea_id %><br />
+    <%= f.text_field :idea_id %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @piece %> |
+<%= link_to 'Back', pieces_path %>
