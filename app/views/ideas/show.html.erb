@@ -1,19 +1,16 @@
-<h2>
-  <%= h(@idea.title) %>
-  <small>by: <%= link_to @idea.user.username, @idea.user %></small>
-</h2>
+<h2><%= h(@idea.title) %></h2>
 
 <p><%=h @idea.description %></p>
 
-<% if is_current_user? @idea.user -%>
 <p>
-  <small>
-  <%= link_to "Edit", edit_idea_path(@idea) %> |
-  <%= link_to "Destroy", @idea, :confirm => 'Are you sure?', :method => :delete %> |
-  <%= link_to "View All", ideas_path %>
+  posted by: <%= link_to @idea.user.username.titlecase, @idea.user %>
+  <% if is_current_user? @idea.user -%>
+  <small>--
+  <%= link_to "Edit Details", edit_idea_path(@idea) %> |
+  <%= link_to "Delete this Idea", @idea, :confirm => 'Are you sure?', :method => :delete %>
   </small>
+  <% end -%>
 </p>
-<% end -%>
 
 <h2>Pieces</h2>
 <ul>

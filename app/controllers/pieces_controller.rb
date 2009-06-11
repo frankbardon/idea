@@ -38,6 +38,7 @@ class PiecesController < ApplicationController
   def edit
     @idea  = Idea.find(params[:idea_id])
     @piece = @idea.pieces.find(params[:id])
+    flash_and_redirect_if_forbidden_access("Forbidden action, redirected.", @piece)
   end
 
   def create

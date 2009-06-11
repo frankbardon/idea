@@ -4,5 +4,9 @@
   <%=h @piece.description %>
 </p>
 
+<p>
+  <small>posted by <%= link_to @piece.user.username, @piece.user %></small>
+</p>
+
 <%= link_to 'Edit', edit_idea_piece_path(@idea, @piece) %> |
-<%= link_to 'Back', idea_pieces_path %>
+<%= link_to 'Back', idea_path(@idea) %>
