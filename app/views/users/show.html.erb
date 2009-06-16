@@ -5,6 +5,11 @@
   <%=h @user.email %>
 </p>
 
+<p>
+  <strong>API Key:</strong>
+  <%=h @user.single_access_token %>
+</p>
+
 <h2>Recent Ideas</h2>
 <ul>
 <%= "<li>There are no recent ideas to display.</li>" if @user.ideas.empty? %>

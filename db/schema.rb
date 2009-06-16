@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090610214745) do
+ActiveRecord::Schema.define(:version => 20090611025620) do
 
   create_table "ideas", :force => true do |t|
     t.string   "title"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(:version => 20090610214745) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "ideas_count"
+    t.string   "single_access_token"
   end
 
 end
